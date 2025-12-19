@@ -1,0 +1,14 @@
+{
+  "operationConfigs": [
+    {
+      "apiSource": "llm-route-by-client",
+      "operations": [
+        {
+          "resource": "/",
+          "methods": ["GET", "POST", "HEAD", "OPTIONS"]
+        }
+      ]
+    }
+  ],
+  "operationConfigType": "proxy"
+}

@@ -1,0 +1,42 @@
+{
+  "keyValueEntries": [
+    {
+      "name": "google__credential",
+      "value": ""
+    },
+    {
+      "name": "google__targetUrl",
+      "value": "https://VERTEXAI_REGION-aiplatform.googleapis.com/v1/projects/VERTEXAI_PROJECT_ID/locations/VERTEXAI_REGION/endpoints/openapi/chat/completions"
+    },
+    {
+      "name": "google__modelName",
+      "value": "google/gemini-2.5-flash"
+    },
+
+    {
+      "name": "huggingface__credential",
+      "value": "HUGGINGFACE_TOKEN"
+    },
+    {
+      "name": "huggingface__targetUrl",
+      "value": "https://router.huggingface.co/sambanova/v1/chat/completions"
+    },
+    {
+      "name": "huggingface__modelName",
+      "value": "Meta-Llama-3.1-8B-Instruct"
+    },
+
+    {
+      "name": "mistral__credential",
+      "value": "MISTRAL_APIKEY"
+    },
+    {
+      "name": "mistral__targetUrl",
+      "value": "https://api.mistral.ai/v1/chat/completions"
+    },
+    {
+      "name": "mistral__modelName",
+      "value": "open-mistral-nemo"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<RaiseFault name='RF-Missing-Model-Configuration'>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <FaultResponse>
+    <Set>
+      <Payload contentType='application/json'>{
+  "error" : {
+    "code" : 500.02,
+    "message" : "Missing Model configuration in KVM for model provider {modelProvider}."
+  }
+}
+</Payload>
+      <StatusCode>500</StatusCode>
+    </Set>
+  </FaultResponse>
+</RaiseFault>

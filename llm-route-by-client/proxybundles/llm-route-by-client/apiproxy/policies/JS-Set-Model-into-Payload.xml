@@ -1,0 +1,8 @@
+<Javascript name='JS-Set-Model-into-Payload'>
+  <Source><![CDATA[
+  var c = JSON.parse(context.getVariable('request.content'));
+  c.model = context.getVariable('modelName');
+  context.setVariable('request.content', JSON.stringify(c));
+  ]]>
+  </Source>
+</Javascript>

@@ -1,0 +1,7 @@
+<AssignMessage name='AM-Model-Provider-Variable'>
+  <AssignVariable>
+    <Name>modelProvider</Name>
+    <Ref>verifyapikey.VA-Key.app.modelProvider</Ref>
+    <Value>-not-set-</Value>
+  </AssignVariable>
+</AssignMessage>

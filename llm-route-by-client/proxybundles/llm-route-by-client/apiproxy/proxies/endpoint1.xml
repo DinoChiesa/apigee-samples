@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright © 2024-2025 Google LLC
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<ProxyEndpoint name="endpoint1">
+  <HTTPProxyConnection>
+    <BasePath>/v1/samples/llm-route-by-client</BasePath>
+  </HTTPProxyConnection>
+
+  <DefaultFaultRule name="default-fault-rule">
+    <Step>
+      <Name>AM-Inject-Proxy-Revision-Header</Name>
+    </Step>
+    <AlwaysEnforce>true</AlwaysEnforce>
+  </DefaultFaultRule>
+
+  <PreFlow name="PreFlow">
+    <Request>
+      <Step>
+        <Name>CORS</Name>
+      </Step>
+      <Step>
+        <!--
+            This step will verify the inbound API Key, and if it is valid, then
+            implicitly set "context variables" containing information about
+            the model to route to.
+        -->
+        <Name>VA-Key</Name>
+      </Step>
+      <Step>
+        <Name>AM-Model-Provider-Variable</Name>
+      </Step>
+      <Step>
+        <Name>RF-Missing-Model-Provider</Name>
+        <Condition>modelProvider = null OR modelProvider = "-not-set-"</Condition>
+      </Step>
+      <Step>
+        <Name>KVM-Get-Model-Provider-Config</Name>
+      </Step>
+      <Step>
+        <Name>RF-Missing-Model-Configuration</Name>
+        <Condition>(targetUrlTemplate = null) OR
+        (modelName = null) OR
+        (credential-for-upstream = null AND modelProvider != "google")</Condition>
+      </Step>
+      <Step>
+        <Name>JS-Set-Model-into-Payload</Name>
+      </Step>
+    </Request>
+  </PreFlow>
+
+  <PostFlow name="PostFlow">
+    <Response>
+      <Step>
+        <Name>AM-Inject-Proxy-Revision-Header</Name>
+      </Step>
+      <Step>
+        <Name>AM-Response-Header-for-Selected-Model</Name>
+      </Step>
+    </Response>
+  </PostFlow>
+
+  <PostClientFlow>
+    <Response>
+      <Step>
+        <Name>ML-CloudLogging</Name>
+        <Condition>request.header.logPayload = "true"</Condition>
+      </Step>
+    </Response>
+  </PostClientFlow>
+
+  <Flows/>
+
+  <!-- Routing is done implicitly by setting target.url -->
+  <RouteRule name="google">
+    <TargetEndpoint>google</TargetEndpoint>
+    <Condition>modelProvider = "google"</Condition>
+  </RouteRule>
+  <RouteRule name="other-models">
+    <TargetEndpoint>other-models</TargetEndpoint>
+  </RouteRule>
+
+</ProxyEndpoint>

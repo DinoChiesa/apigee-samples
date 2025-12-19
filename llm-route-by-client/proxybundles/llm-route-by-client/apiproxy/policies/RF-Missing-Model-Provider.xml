@@ -1,0 +1,15 @@
+<RaiseFault name='RF-Missing-Model-Provider'>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <FaultResponse>
+    <Set>
+      <Payload contentType='application/json'>{
+  "error" : {
+    "code" : 500.03,
+    "message" : "Missing Model provider attribute in the client {verifyapikey.VA-Key.client_id}"
+  }
+}
+</Payload>
+      <StatusCode>500</StatusCode>
+    </Set>
+  </FaultResponse>
+</RaiseFault>

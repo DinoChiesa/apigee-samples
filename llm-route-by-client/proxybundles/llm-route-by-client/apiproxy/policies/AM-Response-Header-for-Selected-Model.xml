@@ -1,0 +1,7 @@
+<AssignMessage name='AM-Response-Header-for-Selected-Model'>
+  <Set>
+    <Headers>
+      <Header name='selected-model'>{verifyapikey.VA-Key.app.modelProvider}; {modelName}</Header>
+    </Headers>
+  </Set>
+</AssignMessage>
