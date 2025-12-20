@@ -1,11 +1,11 @@
-# llm-routing
+# llm-route-by-client
 
 This is a sample Apigee proxy to demonstrate the routing capabilities of Apigee
 across different LLM providers. In this sample we will use Google VertexAI,
 Mistral and HuggingFace as the LLM providers. Apigee will route requests to one of the providers based on
 a custom attribute configured for each of three distinct API Keys.
 
-![architecture](./images/arch.jpg)
+![architecture](./images/arch.png)
 
 ## Pre-Requisites
 
